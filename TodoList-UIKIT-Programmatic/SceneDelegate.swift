@@ -20,12 +20,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 1) Create a UIWindow instance with the windowScene.
         let window = UIWindow(windowScene: windowScene)
         
+        let todos: [Todo] = [
+            Todo(title: "Study TodoList App"),
+            Todo(title: "Study Swift development"),
+            Todo(title: "Finish UIKit tutorial")
+        ]
+        
         // 2) Create a simple root ViewController
-        let rootViewController = MainViewController()
+        let mainViewController = MainViewController()
+        let mainDataSource = MainTableDataSource(
+            todos: todos
+        )
+        mainViewController.tableView.dataSource = mainDataSource
+        mainViewController.tableView.delegate = mainDataSource
+
         // rootViewController.view.backgroundColor = .systemBackground
         
         // 3) Assing the rootViewController and make the windows key and visible
-        window.rootViewController = rootViewController
+        window.rootViewController = mainViewController
         window.makeKeyAndVisible()
         
         // 4) Keep a reference to the new created window
